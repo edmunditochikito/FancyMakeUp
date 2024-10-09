@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<main class="container d-flex justify-content-center align-items-center  min-vh-100">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-8 mt-3">
+            <div class="card rounded-5 bg-light-subtle">
+                <div class="card-header ">
+                    <div class="d-flex justify-content-center">
+                        <img class="card-img img-fluid w-25" src="{{ url_for('static', filename='images/LogoKatherinePNG.png') }}" alt="My Image">
+                    </div>
+                    <h3 class="mt-2 text-center text-primary">Inicia sesion</h3>
+                </div>
+                <div class="card-body text-primary ">
+                    <form id="form" method="post" autocomplete="off">
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <label for="email" class="col-form-label fw-medium fs-5 ">Correo <span class="text-danger">*</span></label>
+                                <input id="email" name="email" class="form-control  border-primary text-dark " type="email">
+                            </div>
+                            <div class="col-6">
+                                <label for="password" class="col-form-label fw-medium fs-5">Contraseña <span class="text-danger">*</span></label>
+                                <input id="password" name="password" class="form-control  border-primary text-dark  " type="password">
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary bg-primary">LOGIN</button>
+                            </div>
+                        </div>
+                    </form>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</main>
+{% endblock body %}
+
+{% block script %}
+    <script type="module" src="{{ url_for('static', filename='js/users/Login.js') }}"></script>
+{% endblock script %}
