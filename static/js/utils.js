@@ -47,6 +47,7 @@ const Toast = Swal.mixin({
   }
 
 
+
   // let generatedOtp = Math.floor(Math.random() * 10000).toString();
 
   // Email.send({

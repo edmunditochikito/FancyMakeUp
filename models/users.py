@@ -23,11 +23,11 @@ class User(db.Model):
 
     def serialize(self):
         return {
-            'user_id': self.user_id,
+            'userId': self.userId,
             'name': self.name,
             'email': self.email,
             'phone': self.phone,
-            'registration_date': self.registration_date.strftime("%Y-%m-%d %H:%M:%S"),
+            'registrationDate': self.registrationDate.strftime("%Y-%m-%d %H:%M:%S"),
             'role': self.role
         }
         

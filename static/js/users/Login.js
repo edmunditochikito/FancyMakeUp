@@ -1,4 +1,4 @@
-import { toastMessage,showAlert} from "../utils.js";
+import { toastMessage,showAlert,} from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
   let form = document.querySelector("form");
@@ -28,16 +28,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
         toastMessage(data.status,data.message)
        
         if(data.status=="success"){
-           e.target.reset()
-           sessionStorage.setItem("token",data.tokens.access)
-           axios.get("/test",{
-            headers:{'Authorization': `Bearer ${sessionStorage.getItem("token")}`}
-           }).then((data)=>{
-               window.location.href="/test"
-           })
-           inputs.forEach((input) => {
+            e.target.reset()
+            inputs.forEach((input) => {
             input.classList.remove("is-valid")
-            if(input.id=="username") input.focus()
+            if(input.id=="name") input.focus()
           });
         }
         

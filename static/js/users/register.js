@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
            e.target.reset()
            inputs.forEach((input) => {
             input.classList.remove("is-valid")
-            if(input.id=="username") input.focus()
+            if(input.id=="name") input.focus()
           });
           setTimeout(() => {
             window.location.href = "/Login";
@@ -57,7 +57,7 @@ function validation(e) {
     phoneValidation(e);
   }
 
-  if (e.target.id == "username") {
+  if (e.target.id == "name") {
     nameValidation(e);
   }
 
