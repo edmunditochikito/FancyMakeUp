@@ -1,20 +1,17 @@
-# Ignorar archivo de configuración de entorno
+
 .env
 
-# Ignorar el entorno virtual
+l
 venv/
 
-# Ignorar archivos de configuración de IDE (por ejemplo, Visual Studio Code)
+
 .vscode/
 .idea/
 
-# Ignorar archivos de caché de Python
+
 __pycache__/
 *.pyc
 
-# Ignorar archivos temporales (si los hay)
 *.log
 *.tmp
 
-# Ignorar otros archivos que no necesiten ser versionados
-# Por ejemplo, si hay archivos de prueba o de desarrollo específicos

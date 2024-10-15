@@ -3,11 +3,12 @@ import { toastMessage,showAlert,} from "../utils.js";
 document.addEventListener("DOMContentLoaded", (e) => {
   let form = document.querySelector("form");
   let inputs = document.querySelectorAll("input");
- 
+  
 
   inputs.forEach((input) => {
     input.addEventListener("blur", validation);
   });
+  form.addEventListener("keydown", (e) =>e.key=="Enter"?e.preventDefault():null);
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -24,7 +25,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
         let response = await axios.post("/Login",inputData);
         let data = response.data;
-        console.log(data)
         toastMessage(data.status,data.message)
        
         if(data.status=="success"){

@@ -8,9 +8,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
   inputs.forEach((input) => {
     input.addEventListener("blur", validation);
   });
-
+  form.addEventListener("keydown", (e) =>e.key=="Enter"?e.preventDefault():null);
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    
     let invalidFields = form.querySelectorAll(".is-invalid");
     if (invalidFields.length > 0) {
       invalidFields[0].focus();
@@ -50,7 +51,6 @@ function validation(e) {
   
   if (e.target.id == "email") {
     emailValidation(e);
-   
   }
 
   if (e.target.id == "phone") {

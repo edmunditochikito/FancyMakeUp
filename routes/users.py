@@ -1,7 +1,7 @@
-from flask import Blueprint,render_template,request,jsonify,redirect,url_for
-from flask_jwt_extended import create_access_token,create_refresh_token, jwt_required,set_access_cookies,set_refresh_cookies,get_jwt_identity
+from flask import Blueprint,render_template,request,jsonify
+from flask_jwt_extended import create_access_token,create_refresh_token, jwt_required,set_access_cookies,set_refresh_cookies,get_jwt_identity,get_jwt
 from models.users import User
-from schemas.users import UserRegisterSchema
+from schemas.users import UserRegisterSchema,UserLogInSchema
 
 
 user=Blueprint("user",__name__)
@@ -42,9 +42,11 @@ def login_GET():
 @user.route("/Login", methods=['POST'])
 def login_POST():
     data = request.json
-    check_user = User.query.filter_by(email=data["email"]).first()
+    user_data=UserLogInSchema(**data)
+    
+    check_user = User.query.filter_by(email=user_data.email).first()
 
-    if check_user and (check_user.check_password_hash(data["password"])):
+    if check_user and (check_user.check_password_hash(user_data.password)):
         access_token = create_access_token(identity=check_user.serialize())
         refresh_token = create_refresh_token(identity=check_user.serialize())
         response = jsonify({
@@ -67,7 +69,9 @@ def login_POST():
 @jwt_required()
 def testing():
     current_user = get_jwt_identity()
+    token=get_jwt()
     print(current_user)
+    print(token["sub"])
     if current_user["role"]!="Buyer":
         return jsonify({"message":"No tienes permisos para acceder a esta ruta","status":"error"}),402
     return jsonify({"message": "Acceso concedido, redirigiendo a /Register", "status": "success", "redirect_url": "/Register"})
