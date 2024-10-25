@@ -46,7 +46,11 @@ const Toast = Swal.mixin({
     }
   }
 
-
+  export function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
   // let generatedOtp = Math.floor(Math.random() * 10000).toString();
 

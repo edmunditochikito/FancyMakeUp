@@ -9,9 +9,59 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/bootstrap.css') }}"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   </head>
 
   <body>
+
+    <nav class="navbar navbar-expand-lg sticky-top rosaEd" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Fancy Makeup</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          
+          <ul class="navbar-nav ms-auto">
+            {% if user_logged_in %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle bi"></i></a>
+                <div class="dropdown-menu dropdown-menu-end bg-primary">
+                  <a class="dropdown-item" href="#">Perfil</a>
+                  <a id="logout" class="dropdown-item" href="#">Cerrar sesión</a>
+                </div>
+              </li>
+            {% else %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle"></i></a>
+                <div class="dropdown-menu dropdown-menu-end bg-primary">
+                  <a class="dropdown-item" href="/Login">Iniciar sesión</a>
+                  <a class="dropdown-item" href="/Register">Registrate</a>
+                </div>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+
+
     {%block body%} {%endblock body%} {%block script%} {%endblock script%}
 
     <script
@@ -22,6 +72,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script type="module" src="{{url_for('static', filename='js/global/logout.js')}}"></script>
    
   </body>
 </html>

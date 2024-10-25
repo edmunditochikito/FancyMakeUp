@@ -28,10 +28,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
         toastMessage(data.status,data.message)
        
         if(data.status=="success"){
+
             e.target.reset()
             inputs.forEach((input) => {
             input.classList.remove("is-valid")
             if(input.id=="name") input.focus()
+            setTimeout(()=>{
+              window.location.href=data.url_for},2000)
           });
         }
         
