@@ -104,3 +104,10 @@ def Log_history(user_id):
     new_log = Login_History(user_id=user_id)
     new_log.save()
     return True
+
+@user.route("/whoAmI", methods=["GET"])
+@jwt_required() 
+def who_am_i():
+    current_user = get_jwt_identity() 
+    response = jsonify({"you are":current_user })
+    return response

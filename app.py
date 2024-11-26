@@ -6,6 +6,7 @@ from config import Config,db,jwt
 
 from routes.users import user 
 from routes.index import index
+from routes.products import product
 
 
 
@@ -17,6 +18,7 @@ CORS(app, supports_credentials=True)
 
 app.register_blueprint(user)
 app.register_blueprint(index)
+app.register_blueprint(product)
 
 @app.context_processor
 def inject_user():
@@ -29,4 +31,4 @@ def inject_user():
     return {'user_logged_in': current_user is not None, 'current_user': current_user}
 
 if __name__=="__main__":
-    app.run()
+    app.run(port=3000,debug=True)

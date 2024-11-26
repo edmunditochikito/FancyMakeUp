@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %} 
+<div class="container ">
+    <div class="card bg-light-subtle">
+        <div class="card-header text-center fw-bold text-primary-emphasis" style="background-color: #e4d7ff;">
+            <h2>Registrar Productos</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" id="myForm">
+                <div class="row d-flex justify-content-center mb-3">
+
+                    <div class="col-12 mb-3">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto border-primary" name="symbol"
+                            placeholder="Symbol" id="symbol" type="text">
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto border-primary" name="shares"
+                            placeholder="Shares" id="shares" type="text">
+                    </div>
+
+
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-3 d-flex justify-content-center">
+                        <button id="edmundo" class="btn btn-primary" type="submit" disabled>Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock body %}

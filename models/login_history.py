@@ -1,5 +1,5 @@
 from config import db
-from datetime import datetime, timezone
+from datetime import datetime
 import pytz
 class Login_History(db.Model):
     __tablename__ = 'login_history'

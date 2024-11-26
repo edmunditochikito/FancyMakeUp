@@ -12062,13 +12062,13 @@ textarea.form-control-lg {
   }
 }
 body {
-  /*background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);*/
-  /* background-image: linear-gradient(90deg, #ffe6f2, #ffc0cb) */
   background-image: url("../images/diferentes-tipos-cosmeticos-esparcidos-sobre-mesa-rosa_23-2148046961.jpeg");
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
-  backdrop-filter: blur(10px);
+  min-height: 100vh;
+  overflow-x: hidden;
+  
+  backdrop-filter: blur(5px);
 }
 
 [data-bs-theme=dark] body {
@@ -12615,7 +12615,6 @@ body {
 .offcanvas .text-muted {
   color: rgba(255, 255, 255, 0.7) !important;
 }
-
 .rosaEd{
- background-color: #f963af;
+background-color: #f963af;
 }
