@@ -7,6 +7,7 @@ from config import Config,db,jwt
 from routes.users import user 
 from routes.index import index
 from routes.products import product
+from routes.categories import categories
 
 
 
@@ -19,7 +20,7 @@ CORS(app, supports_credentials=True)
 app.register_blueprint(user)
 app.register_blueprint(index)
 app.register_blueprint(product)
-
+app.register_blueprint(categories)
 @app.context_processor
 def inject_user():
     try:

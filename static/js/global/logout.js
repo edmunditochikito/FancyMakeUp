@@ -4,14 +4,13 @@ import { toastMessage,getCookie } from '../utils.js';
 
 document.addEventListener('DOMContentLoaded', async (e) => {
     let button = document.querySelector("#logout");
-    console.log(button);
+
 
     if (button) {
         button.addEventListener('click', async (e) => {
             e.preventDefault(); 
             try {
                 const csrfToken = getCookie('csrf_access_token')
-                console.log(csrfToken)
                 let response = await axios.post("/logout", {}, {
                     headers: {
                         'X-CSRF-Token': csrfToken
