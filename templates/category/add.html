@@ -1,0 +1,59 @@
+{% extends 'layout.html' %} {% block body %}
+<main>
+  <div class="card shadow m-2 bg-light-subtle">
+    <div
+      class="card-header w-100 rounded-top"
+      style="background-color: #e4d7ff"
+    >
+      <h3 class="fw-bold text-black m-0 py-2">Agregar Categorias</h3>
+    </div>
+    <div class="card-body mx-2 fs-main">
+
+      <form method="post" id="myForm">
+        <div class="row mb-2">
+          <div class="col-lg-1 col-md-1 col-sm-12 ">
+            <label for="category_name" class="text-dark">Nombre</label>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-12">
+            <input
+              autocomplete="off"
+              autofocus
+              class="form-control text-dark border-primary mb-sm-1"
+              name="category_name"
+              id="category_name"
+              type="text"
+            />
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-12 ">
+            <label for="description" class="text-dark">Descripcion</label>
+          </div>
+          <div class="col-lg-5 col-md-4 col-sm-12">
+            <textarea
+              autocomplete="off"
+              autofocus
+              class="form-control text-dark border-primary"
+              name="description"
+              id="description"
+              type="text"
+              rows="1"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+          <div class="col-3 d-flex justify-content-center">
+            <button id="edmundo" class="btn btn-primary" type="submit">
+              Agregar Categoria
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <!-- NOMBRE CEDULA DIRECCIÓN TELEFONO -->
+</main>
+{% endblock body %} {%block script%}
+<script type="module" src="{{url_for('static', filename='/js/categories/add.js')}}"></script>
+{%endblock script%}

@@ -12067,8 +12067,6 @@ body {
   background-size: cover;
   min-height: 100vh;
   overflow-x: hidden;
-  
-  backdrop-filter: blur(5px);
 }
 
 [data-bs-theme=dark] body {
@@ -12621,3 +12619,33 @@ background-color: #f963af;
 .placeColor::placeholder{
   color:black !important;
 }
+/* Personalizar la barra de búsqueda */
+#dt-search-0{
+  background-color: #f0f0f0; /* Fondo gris claro */
+  border: 1px solid #007bff; /* Borde azul */
+  color: #333; /* Texto gris oscuro */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 5px;
+}
+
+/* Personalizar los botones del searchBuilder */
+.dtsb-button{
+  background-color: #28a745; /* Fondo verde */
+  color: #fff; /* Texto blanco */
+  border: none;
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 15px;
+}
+
+.dtsb-button:hover {
+  background-color: #218838; /* Fondo verde más oscuro al pasar el cursor */
+}
+
+.fs-main{
+  font-size: 14px;
+}
+
+.fw-bold{
+  font-weight: 900 !important;
+}
+

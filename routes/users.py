@@ -1,9 +1,11 @@
-from flask import Blueprint,render_template,request,jsonify
+from flask import Blueprint,render_template,request,jsonify,redirect
 from flask_jwt_extended import create_access_token,create_refresh_token, jwt_required,set_access_cookies,set_refresh_cookies,get_jwt_identity,get_jwt,unset_jwt_cookies
+from flask_mail import Message
 from models.users import User
 from models.login_history import Login_History
 from schemas.users import UserRegisterSchema,UserLogInSchema
-from config import db
+from tasks.login_register import log_history_task
+from config import db,mail
 
 user=Blueprint("user",__name__)
 
@@ -11,21 +13,27 @@ user=Blueprint("user",__name__)
 def register_GET():
     return render_template("users/register.html")
 
+with open("templates/index.html", "r", encoding="utf-8") as f:
+    html_content = f.read()
+
 @user.route("/Register",methods=["POST"])
 def register_POST():
     try:
         data=request.json
         user_data=UserRegisterSchema(**data)
         check_user = User.query.filter_by(email=user_data.email).first()
-        if check_user is not None:
-            return jsonify({"message":"El Correo ya esta en uso","status":"error"})
-        
-        print(db.session.query(User))
+        # if check_user is not None:
+        #     return jsonify({"message":"El Correo ya esta en uso","status":"error"})
+        print(html_content)
+        msg=Message("victoor",sender="edmundo2004.ea@gmail.com",recipients=[user_data.email],html=html_content)
+        msg.body="victorr victoor"
+        mail.send(message=msg)
         new_user = User(**user_data.model_dump())
         new_user.save()
         return jsonify({"message":"Usuario Registrado correctamente, Redirigiendo al Login","status":"success"})
     except Exception as e:
-        return jsonify({"message":f"El campo {str(e)} esta vacio","status":"error"})
+        print(e)
+        return jsonify({"message":f"Uno o mas campos estan vacios {e}","status":"error"})
         
         
 @user.route("/Login",methods=['GET'])
@@ -33,11 +41,7 @@ def register_POST():
 def login_GET():
     user=get_jwt_identity()
     if user:
-        if user["role"]=="Buyer":
-            return jsonify({"message":"Ya has iniciado sesión como comprador","status":"success"}) 
-        else:
-            return jsonify({"message":"Ya has iniciado sesión como administrador","status":"success"}) 
-            
+        return redirect("/")
     else:
         return render_template("users/Login.html")
 
@@ -50,7 +54,7 @@ def login_POST():
     
     if check_user and (check_user.check_password_hash(user_data.password)):
         
-        Log_history(check_user.user_id)
+        log_history_task(check_user.user_id)
         access_token = create_access_token(identity=check_user.serialize())
         refresh_token = create_refresh_token(identity=check_user.serialize())
         response = jsonify({

@@ -1,54 +1,64 @@
-import { toastMessage,showAlert} from "../utils.js";
+import { toastMessage, showAlert } from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
   let form = document.querySelector("form");
   let inputs = document.querySelectorAll("input");
 
-
   inputs.forEach((input) => {
     input.addEventListener("blur", validation);
   });
-  form.addEventListener("keydown", (e) =>e.key=="Enter"?e.preventDefault():null);
+  form.addEventListener("keydown", (e) =>
+    e.key == "Enter" ? e.preventDefault() : null
+  );
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
+
     let invalidFields = form.querySelectorAll(".is-invalid");
+    let emptyFields = Array.from(inputs).filter(
+      (input) => input.value.trim() === ""
+    );
+
     if (invalidFields.length > 0) {
       invalidFields[0].focus();
-    } else {
-      let inputData = {};
-      inputs.forEach((input) => {
-        inputData[input.id] = input.value;
+      return;
+    }
+
+    if (emptyFields.length > 0) {
+      emptyFields[0].focus();
+      emptyFields.forEach((input) => {
+        input.classList.add("is-invalid");
+        showAlert(input, "Este campo es obligatorio.");
       });
+      return;
+    }
+    let inputData = {};
+    inputs.forEach((input) => {
+      inputData[input.id] = input.value;
+    });
 
-      try {
+    try {
+      let response = await axios.post("/Register", inputData);
+      let data = response.data;
 
-        let response = await axios.post("/Register",inputData);
-        let data = response.data;
-        
-        toastMessage(data.status,data.message)
-       
-        if(data.status=="success"){
-           e.target.reset()
-           inputs.forEach((input) => {
-            input.classList.remove("is-valid")
-            if(input.id=="name") input.focus()
-          });
-          setTimeout(() => {
-            window.location.href = "/Login";
-          }, 2000);
-        }
-        
-        
-      } catch (e) {
-        console.log(e);
+      toastMessage(data.status, data.message);
+
+      if (data.status == "success") {
+        e.target.reset();
+        inputs.forEach((input) => {
+          input.classList.remove("is-valid");
+          if (input.id == "name") input.focus();
+        });
+        setTimeout(() => {
+          window.location.href = "/Login";
+        }, 2000);
       }
+    } catch (e) {
+      console.log(e);
     }
   });
 });
 
 function validation(e) {
-  
   if (e.target.id == "email") {
     emailValidation(e);
   }
@@ -113,5 +123,3 @@ function passwordValidation(password) {
 
   showAlert(password.target, message);
 }
-
-

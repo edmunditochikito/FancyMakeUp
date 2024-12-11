@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block body %} 
-<div class="container ">
-    <div class="card bg-light-subtle">
-        <div class="card-header text-center fw-bold text-primary-emphasis" style="background-color: #e4d7ff;">
+<!-- <div class="container ">
+    <div class="card bg-light-subtle rounded-5 ">
+        <div class="card-header rounded-top-5 text-center fw-bold text-primary-emphasis" style="background-color: #e4d7ff;">
             <h2>Registrar Productos</h2>
         </div>
         <div class="card-body ">
@@ -50,8 +50,8 @@
                     </div>
                     <div class="col-lg-2 col-sm-12 col-md-4 mb-md-3">
                        <select name="status" id="status" class="form-control text-dark border-primary">
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
+                        <option value="active">Activo</option>
+                        <option value="inactive">Inactivo</option>
                        </select>
                     </div>
 
@@ -59,34 +59,116 @@
                         <label for="image_url" class="text-dark">Imagen</label>
                     </div>
                     <div class="col-sm-12 col-lg-4 col-md-10">
-                        <input autocomplete="off" autofocus class="form-control   text-dark border-primary" name="image_url"
+                        <input autocomplete="off" autofocus class="form-control-file   text-dark border-primary" name="image_url"
                              id="image_url" type="file" accept="image/*">
                     </div>
 
                 </div>
                 <div class="row mb-3">
-                    <div class="col-lg-1 col-sm-12 col-md-2 align-content-center">
+                    <div class="col-lg-1  col-sm-12 col-md-2 align-content-center">
                         <label for="description" class="text-dark">Descripcion</label>
                     </div>
-                    <div class="col-lg-11 col-sm-12 col-md-10">
-                       <textarea name="description" id="description" class="form-control text-dark border-primary">
-                       </textarea>
+                    <div class="col-lg-11  col-sm-12 col-md-10">
+                       <textarea name="description" id="description" class="form-control text-dark border-primary"></textarea>
                     </div>
                 </div>
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-3 d-flex justify-content-center">
-                        <button id="edmundo" class="btn btn-primary" type="submit" disabled>Add product</button>
+                        <button id="edmundo" class="btn btn-primary" type="submit">Add product</button>
                     </div>
                 </div>
             </form>
         </div>
 
     </div>
-</div>
+</div> -->
+
+<main>
+    <div class="card shadow m-2 bg-light-subtle">
+      <div class="card-header w-100 rounded-top "style="background-color: #e4d7ff;">
+        <h3 class="fw-bold text-black m-0 py-2">Agregar Productos</h3>
+      </div>
+      <div class="card-body mx-2 fs-main">
+        <form method="post" id="myForm">
+            <div class="row mb-2">
+
+                <div class="col-lg-1 col-md-2 col-sm-12 align-content-center">
+                    <label for="product_name" class="text-dark">Producto</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <input autocomplete="off" autofocus class="form-control  text-dark border-primary" name="product_name"
+                        id="product_name" type="text">
+                </div>
+
+                <div class="col-lg-1 col-md-1 col-sm-12 align-content-center">
+                    <label for="price" class="text-dark">Precio</label>
+                </div>
+                <div class="col-lg-3 col-md-2 col-sm-12">
+                    <input autocomplete="off" autofocus class="form-control   text-dark border-primary" name="price"
+                         id="price" type="text">
+                </div>
+
+                <div class="col-lg-1 col-md-2 col-sm-12 align-content-center">
+                    <label for="stock" class="text-dark">Existencia</label>
+                </div>
+                <div class="col-lg-3 col-md-2 col-sm-12">
+                    <input autocomplete="off" autofocus class="form-control   text-dark border-primary" name="stock"
+                         id="stock" type="text" >
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12 col-lg-1  mb-md-3 col-md-2 align-content-center">
+                    <label for="category_id" class="text-dark">Categoria</label>
+                </div>
+                <div class="col-sm-12 col-lg-3 col-md-4  mb-md-3">
+                   <select name="category_id" id="category_id" class="form-control border-primary text-dark">
+
+                   </select>
+                </div>
+             
+                <div class="col-sm-12 col-md-2 col-lg-1  mb-md-3 align-content-center">
+                    <label for="status" class="text-dark">Estado</label>
+                </div>
+                <div class="col-lg-2 col-sm-12 col-md-4 mb-md-3">
+                   <select name="status" id="status" class="form-control text-dark border-primary">
+                    <option value="active">Activo</option>
+                    <option value="inactive">Inactivo</option>
+                   </select>
+                </div>
+
+                <div class="col-sm-12 col-lg-1 col-md-2  mb-md-3 align-content-center">
+                    <label for="image_url" class="text-dark">Imagen</label>
+                </div>
+                <div class="col-sm-12 col-lg-4 col-md-10">
+                    <input autocomplete="off" autofocus class="form-control-file   text-dark border-primary" name="image_url"
+                         id="image_url" type="file" accept="image/*">
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-1  col-sm-12 col-md-2 align-content-center">
+                    <label for="description" class="text-dark">Descripcion</label>
+                </div>
+                <div class="col-lg-11  col-sm-12 col-md-10">
+                   <textarea name="description" id="description" class="form-control text-dark border-primary"></textarea>
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-3 d-flex justify-content-center">
+                    <button id="edmundo" class="btn btn-primary" type="submit">Add product</button>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+    <!-- NOMBRE CEDULA DIRECCIÓN TELEFONO -->
+  </main>
 
 {% endblock body %}
 
 {%block script%} 
-<script src="{{url_for('static', filename='js/products/add.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='js/products/add.js')}}"></script>
 {%endblock script%}
