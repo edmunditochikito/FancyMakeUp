@@ -1,10 +1,6 @@
-# tasks.py
-from celery import Celery
-from config import db
+from config import db,celery
 from models.login_history import Login_History
 
-# Ajusta la URL de tu broker (Redis en este caso) según sea necesario
-celery = Celery(__name__, broker='redis://localhost:6379/0', backend='redis://localhost:6379/0')
 
 @celery.task
 def log_history_task(user_id):

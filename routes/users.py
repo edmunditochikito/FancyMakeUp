@@ -5,7 +5,8 @@ from models.users import User
 from models.login_history import Login_History
 from schemas.users import UserRegisterSchema,UserLogInSchema
 from tasks.login_register import log_history_task
-from config import db,mail
+from tasks.mail_confirmation import mail_confirmation
+
 
 user=Blueprint("user",__name__)
 
@@ -24,10 +25,8 @@ def register_POST():
         check_user = User.query.filter_by(email=user_data.email).first()
         # if check_user is not None:
         #     return jsonify({"message":"El Correo ya esta en uso","status":"error"})
-        print(html_content)
-        msg=Message("victoor",sender="edmundo2004.ea@gmail.com",recipients=[user_data.email],html=html_content)
-        msg.body="victorr victoor"
-        mail.send(message=msg)
+       
+        mail_confirmation.delay(user_data.email)
         new_user = User(**user_data.model_dump())
         new_user.save()
         return jsonify({"message":"Usuario Registrado correctamente, Redirigiendo al Login","status":"success"})

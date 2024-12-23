@@ -3,10 +3,6 @@ from flask_jwt_extended import get_jwt_identity,verify_jwt_in_request
 from flask_cors import CORS
 from config import Config,db,jwt,mail
 
-from routes.users import user 
-from routes.index import index
-from routes.products import product
-from routes.categories import categories
 
 
 
@@ -30,10 +26,7 @@ def invalid_token_loader(jwt_header,jwt_data):
     return redirect("/")
 
 
-app.register_blueprint(user)
-app.register_blueprint(index)
-app.register_blueprint(product)
-app.register_blueprint(categories)
+
 
 @app.context_processor
 def inject_user():
