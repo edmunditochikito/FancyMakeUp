@@ -2,6 +2,12 @@ from flask import Flask,redirect
 from flask_jwt_extended import get_jwt_identity,verify_jwt_in_request
 from flask_cors import CORS
 from config import Config,db,jwt,mail
+from routes.users import user 
+from routes.index import index
+from routes.products import product
+from routes.categories import categories
+
+
 
 
 
@@ -12,6 +18,12 @@ mail.init_app(app)
 db.init_app(app)
 jwt.init_app(app)
 CORS(app, supports_credentials=True)
+
+app.register_blueprint(user)
+app.register_blueprint(index)
+app.register_blueprint(product)
+app.register_blueprint(categories)
+
 
 @jwt.unauthorized_loader
 def unauthorized_loader(error):

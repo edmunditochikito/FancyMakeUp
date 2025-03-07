@@ -30,6 +30,7 @@ const generateHTML = (data, container) => {
 };
 
 const createCard = (product) => {
+    console.log(product.image_url);
     return `
         <div class="col">
             <div class="card shadow rounded-1 h-100 bg-light-subtle">

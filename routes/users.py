@@ -4,8 +4,6 @@ from flask_mail import Message
 from models.users import User
 from models.login_history import Login_History
 from schemas.users import UserRegisterSchema,UserLogInSchema
-from tasks.login_register import log_history_task
-from tasks.mail_confirmation import mail_confirmation
 
 
 user=Blueprint("user",__name__)
@@ -23,10 +21,9 @@ def register_POST():
         data=request.json
         user_data=UserRegisterSchema(**data)
         check_user = User.query.filter_by(email=user_data.email).first()
-        # if check_user is not None:
-        #     return jsonify({"message":"El Correo ya esta en uso","status":"error"})
+        if check_user is not None:
+            return jsonify({"message":"El Correo ya esta en uso","status":"error"})
        
-        mail_confirmation.delay(user_data.email)
         new_user = User(**user_data.model_dump())
         new_user.save()
         return jsonify({"message":"Usuario Registrado correctamente, Redirigiendo al Login","status":"success"})
@@ -53,7 +50,7 @@ def login_POST():
     
     if check_user and (check_user.check_password_hash(user_data.password)):
         
-        log_history_task(check_user.user_id)
+        Log_history(check_user.user_id)
         access_token = create_access_token(identity=check_user.serialize())
         refresh_token = create_refresh_token(identity=check_user.serialize())
         response = jsonify({
